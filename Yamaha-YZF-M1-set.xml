@@ -12,7 +12,7 @@
 		<aircraft-version>0.0.1</aircraft-version>
 		<status>alpha</status>
 		<flight-model>yasim</flight-model>
-		<aero>Yamaha-YZF-R1-yasim</aero>
+		<aero>Yamaha-YZF-M1-yasim</aero>
 
 		<sound>
 			<path>Aircraft/Yamaha-YZF/Sounds/sound.xml</path>

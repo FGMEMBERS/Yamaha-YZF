@@ -7,13 +7,13 @@
 -->
 
 <PropertyList>
-  <path>Yamaha-YZF.ac</path> 
+  <path>Yamaha-YZF_R1.ac</path> 
   
   <sound><path>Aircraft/Yamaha-YZF/Sounds/mp-sound.xml</path></sound>
 
   <nasal>
     <load>
-      var livery_update = aircraft.livery_update.new("Aircraft/Yamaha-YZF/Models/Liveries", 10);
+      var livery_update = aircraft.livery_update.new("Aircraft/Yamaha-YZF/Models/Liveries-R1", 10);
     </load>
 
     <unload>
@@ -65,7 +65,7 @@
     <object-name>starter</object-name>
     <property-base>sim/model/livery</property-base>
     <texture-prop>texture</texture-prop>
-    <texture>Yamaha-YZF.png</texture>
+    <texture>Yamaha-YZF-R1.png</texture>
   </animation>
   
   <animation>
@@ -126,9 +126,9 @@
 	<name>RPM</name>
     <path>Aircraft/Yamaha-YZF/Models/Instruments/combi/combi.xml</path>
     <offsets>
-      <x-m> -0.64 </x-m>
+      <x-m> -0.749 </x-m>
       <y-m> -0.0765 </y-m>
-      <z-m> 0.97 </z-m>
+      <z-m> 0.897 </z-m>
       <pitch-deg> -38 </pitch-deg>
     </offsets>
   </model>
