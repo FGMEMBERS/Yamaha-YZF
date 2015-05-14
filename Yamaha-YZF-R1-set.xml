@@ -1027,7 +1027,7 @@ and have fun!</text>
   <yamaha>
    <file>Aircraft/Yamaha-YZF/Systems/Yamaha-YZF.nas</file>
    <file>Aircraft/Yamaha-YZF/Systems/gearbox.nas</file>
-   <file>Aircraft/Yamaha-YZF/Systems/liveries.nas</file>
+   <file>Aircraft/Yamaha-YZF/Systems/liveries-R1.nas</file>
    <file>Aircraft/Yamaha-YZF/Systems/laptimes.nas</file>
    <file>Aircraft/Yamaha-YZF/VirtualRacer/virtual_racer.nas</file>
   </yamaha>

@@ -11,7 +11,7 @@
     <model>
         <livery>
             <name type="string">No.2 Dean Harrison</name>
-            <texture>Liveries/Yamaha-YZF-MarTrain.png</texture>
+            <texture>Liveries-R1/Yamaha-YZF-MarTrain.png</texture>
         </livery>
     </model>
 </sim>
