@@ -143,13 +143,13 @@ var loop = func {
 			vmax = 100;
 			fastcircuit.setValue(0.3);
 		} else if (gear.getValue() == 4) {
-			vmax = 130;
+			vmax = 135;
 			fastcircuit.setValue(0.4);
 		} else if (gear.getValue() == 5) {
-			vmax = 170;
+			vmax = 174;
 			fastcircuit.setValue(0.5);
 		} else if (gear.getValue() == 6) {
-			vmax = 205;
+			vmax = 212;
 			fastcircuit.setValue(0.6);
 		}
 
@@ -157,10 +157,10 @@ var loop = func {
 		if (gear.getValue() > 0 and clutch.getValue() == 0) {
 			if(fastcircuit.getValue() == 0.1){
 			  transmissionpower = throttle.getValue()*2;
-			  setprop("/sim/weight[1]/weight-lb", throttle.getValue()*200);
+			  setprop("/sim/weight[1]/weight-lb", throttle.getValue()*300);
 			}else if(fastcircuit.getValue() == 0.2){
 			  transmissionpower = 0.9*throttle.getValue()-propulsion.getValue()/maxrpm;
-			  setprop("/sim/weight[1]/weight-lb", throttle.getValue()*40);
+			  setprop("/sim/weight[1]/weight-lb", throttle.getValue()*200);
 			}else{
 			  transmissionpower = 0.65*throttle.getValue()-propulsion.getValue()/maxrpm;
 			  setprop("/sim/weight[1]/weight-lb", 0);
@@ -222,12 +222,13 @@ var loop = func {
 
 	   	 if(rpm.getValue() < minrpm) rpm.setValue(minrpm);  # place after the rpm calculation
 	 
-	   	 if (fuel.getValue() < 0.0000015) {
+	   	 if (fuel.getValue() < 0.000002) {
 	   	  running.setValue(0);
 	   	  }
 	   	 else {
 	   	  fuel_lev = fuel.getValue();
-	   	  fuel.setValue(fuel_lev - (0.85*throttle.getValue()+0.1)*0.0000015);
+		  setprop("/controls/fuel/remember-level", fuel.getValue()); # save it for restart
+	   	  fuel.setValue(fuel_lev - (throttle.getValue()+0.1)*0.00000162);
 	   	 }
 		
 		#-------------- ENGINE RUNNING END --------------------

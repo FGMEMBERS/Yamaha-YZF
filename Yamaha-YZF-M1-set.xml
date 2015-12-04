@@ -315,6 +315,7 @@ and have fun!</text>
 		<path>/controls/flight/select-throttle-input</path>
 		<path>/controls/Yamaha-YZF/old-mens-mode</path>
 		<path>/controls/hang-off-speed</path>
+		<path>/controls/fuel/remember-level</path>
 	</aircraft-data> 
 	<current-view>
 		<x-offset-m>0</x-offset-m>
@@ -914,6 +915,9 @@ and have fun!</text>
 		  <throttle-on-elev-axis type="float">0.0</throttle-on-elev-axis>
 		  <flaps>0.0</flaps> <!-- helper for the fastcircuit -->
 		</flight>
+		<fuel>
+			<remember-level type="float">0.0</remember-level>
+		</fuel>
 	</controls>
  
 	<instrumentation>
