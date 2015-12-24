@@ -71,8 +71,10 @@ var loop = func {
 		clutch.setValue(0);
 	}
 	
-	#gspeed = getprop("/instrumentation/airspeed-indicator/indicated-speed-kt") or 0;
+	#gspeed = getprop("/instrumentation/airspeed-indicator/indicated-speed-kt") or 0;	
 	gspeed = getprop("/velocities/groundspeed-kt") or 0;
+	var bwspeed = getprop("/gear/gear[1]/rollspeed-ms") or 0;
+	bwspeed = bwspeed*2.23694; # meter per secondes to miles per hour
 	
 	# drive with gears
 	# clutch control
@@ -80,7 +82,11 @@ var loop = func {
 	if (lastfastcircuit != fastcircuit.getValue()){
 			###### fastcircuit without clutch
 			if(fastcircuit.getValue() == 0){
-				gear.setValue(0);
+			    if(bwspeed < 2){
+					gear.setValue(0);
+				}else{
+					gear.setValue(1);
+				}
 				gearsound.setValue(1);
 			}else if(fastcircuit.getValue() > 0 and fastcircuit.getValue() < 0.11 ){
 				gear.setValue(1);
@@ -159,11 +165,15 @@ var loop = func {
 			  transmissionpower = throttle.getValue()*2;
 			  setprop("/sim/weight[1]/weight-lb", throttle.getValue()*300);
 			}else if(fastcircuit.getValue() == 0.2){
-			  transmissionpower = 0.9*throttle.getValue()-propulsion.getValue()/maxrpm;
-			  setprop("/sim/weight[1]/weight-lb", throttle.getValue()*200);
+			  transmissionpower = 0.95*throttle.getValue()-propulsion.getValue()/maxrpm;
+			}else if(fastcircuit.getValue() == 0.3){
+			  transmissionpower = 0.85*throttle.getValue()-propulsion.getValue()/maxrpm;
+			}else if(fastcircuit.getValue() == 0.4){
+			  transmissionpower = 0.75*throttle.getValue()-propulsion.getValue()/maxrpm;
+			}else if(fastcircuit.getValue() == 0.5){
+			  transmissionpower = 0.62*throttle.getValue()-propulsion.getValue()/maxrpm;
 			}else{
-			  transmissionpower = 0.65*throttle.getValue()-propulsion.getValue()/maxrpm;
-			  setprop("/sim/weight[1]/weight-lb", 0);
+			  transmissionpower = 0.42*throttle.getValue()-propulsion.getValue()/maxrpm;
 			}
 			transmissionpower = transmissionpower * (1- killed.getValue());
 			propulsion.setValue(transmissionpower);
