@@ -155,7 +155,7 @@ var loop = func {
 			vmax = 174;
 			fastcircuit.setValue(0.5);
 		} else if (gear.getValue() == 6) {
-			vmax = 212;
+			vmax = 205;
 			fastcircuit.setValue(0.6);
 		}
 
