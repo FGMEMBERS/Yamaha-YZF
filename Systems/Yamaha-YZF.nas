@@ -92,7 +92,6 @@ setlistener("/devices/status/mice/mouse/button[2]", func (state){
 	}
 },0,1);
 
-
 setlistener("/controls/flight/aileron", func (position){
     var position = position.getValue();
 	# helper for the steering
@@ -106,9 +105,16 @@ setlistener("/controls/flight/aileron", func (position){
 		}
 		
 	}else{
-		var np = math.round(position*position*position*100);
-		np = np/100;
-		interpolate("/controls/flight/aileron-manual", np,0.1);
+		var joyst = getprop("/input/joysticks/js/id") or '';
+		if(joyst == 'Arduino Leonardo'){
+			var np = math.round(position*100);
+			np = np/100;
+			interpolate("/controls/flight/aileron-manual", np,0.1);
+		}else{
+			var np = math.round(position*position*position*100);
+			np = np/100;
+			interpolate("/controls/flight/aileron-manual", np,0.1);
+		}
 	}
 });
 
@@ -199,6 +205,8 @@ setlistener("/controls/engines/engine[0]/throttle", func (position){
 setlistener("/instrumentation/airspeed-indicator/indicated-speed-kt", func (speed){
 	var groundspeed = getprop("/velocities/groundspeed-kt") or 0;
     var speed = speed.getValue();
+    # only for manipulate the reset m function 
+	if (speed > 20) setprop("/controls/waiting", 1);
 	if(getprop("/instrumentation/Yamaha-YZF/speed-indicator/selection")){
 		if(groundspeed > 0.1){
 			setprop("/instrumentation/Yamaha-YZF/speed-indicator/speed-meter", speed*1.15077945); # mph
