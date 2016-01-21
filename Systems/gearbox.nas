@@ -27,6 +27,7 @@ var inertia = 0;
 var vmax = 0;
 var looptime = 0.1;
 var lastrpm = 0;
+var newrpm = 0;
 var transmissionpower = 0;
 var minrpm = 2100;
 var maxrpm = 19500;
@@ -71,8 +72,10 @@ var loop = func {
 		clutch.setValue(0);
 	}
 	
-	#gspeed = getprop("/instrumentation/airspeed-indicator/indicated-speed-kt") or 0;
+	#gspeed = getprop("/instrumentation/airspeed-indicator/indicated-speed-kt") or 0;	
 	gspeed = getprop("/velocities/groundspeed-kt") or 0;
+	var bwspeed = getprop("/gear/gear[1]/rollspeed-ms") or 0;
+	bwspeed = bwspeed*2.23694; # meter per secondes to miles per hour
 	
 	# drive with gears
 	# clutch control
@@ -80,7 +83,11 @@ var loop = func {
 	if (lastfastcircuit != fastcircuit.getValue()){
 			###### fastcircuit without clutch
 			if(fastcircuit.getValue() == 0){
-				gear.setValue(0);
+			    if(bwspeed < 2){
+					gear.setValue(0);
+				}else{
+					gear.setValue(1);
+				}
 				gearsound.setValue(1);
 			}else if(fastcircuit.getValue() > 0 and fastcircuit.getValue() < 0.11 ){
 				gear.setValue(1);
@@ -143,10 +150,10 @@ var loop = func {
 			vmax = 100;
 			fastcircuit.setValue(0.3);
 		} else if (gear.getValue() == 4) {
-			vmax = 130;
+			vmax = 135;
 			fastcircuit.setValue(0.4);
 		} else if (gear.getValue() == 5) {
-			vmax = 170;
+			vmax = 174;
 			fastcircuit.setValue(0.5);
 		} else if (gear.getValue() == 6) {
 			vmax = 205;
@@ -157,19 +164,34 @@ var loop = func {
 		if (gear.getValue() > 0 and clutch.getValue() == 0) {
 			if(fastcircuit.getValue() == 0.1){
 			  transmissionpower = throttle.getValue()*2;
-			  setprop("/sim/weight[1]/weight-lb", throttle.getValue()*200);
+			  setprop("/sim/weight[1]/weight-lb", throttle.getValue()*300);
 			}else if(fastcircuit.getValue() == 0.2){
-			  transmissionpower = 0.9*throttle.getValue()-propulsion.getValue()/maxrpm;
-			  setprop("/sim/weight[1]/weight-lb", throttle.getValue()*40);
-			}else{
-			  transmissionpower = 0.65*throttle.getValue()-propulsion.getValue()/maxrpm;
+			  transmissionpower = 0.95*throttle.getValue()-propulsion.getValue()/maxrpm;
+			  setprop("/sim/weight[1]/weight-lb", throttle.getValue()*100);
+			}else if(fastcircuit.getValue() == 0.3){
+			  transmissionpower = 0.85*throttle.getValue()-propulsion.getValue()/maxrpm;
 			  setprop("/sim/weight[1]/weight-lb", 0);
+			}else if(fastcircuit.getValue() == 0.4){
+			  transmissionpower = 0.75*throttle.getValue()-propulsion.getValue()/maxrpm;
+			}else if(fastcircuit.getValue() == 0.5){
+			  transmissionpower = 0.62*throttle.getValue()-propulsion.getValue()/maxrpm;
+			}else{
+			  transmissionpower = 0.42*throttle.getValue()-propulsion.getValue()/maxrpm;
 			}
 			transmissionpower = transmissionpower * (1- killed.getValue());
 			propulsion.setValue(transmissionpower);
 			
-			newrpm = (gspeed < 20 and throttle.getValue() > 0.1) ? throttle.getValue()*(maxrpm+3500) : (maxrpm+1500)/vmax*gspeed;
-			rpm.setValue(newrpm);
+			if(bwspeed < 3 and gspeed < 30){
+				newrpm = throttle.getValue()*(maxrpm);
+				rpm.setValue(newrpm);
+			}else{
+				newrpm = (maxrpm+minrpm)/vmax*gspeed;
+				#newrpm = (newrpm < lastrpm) ? (lastrpm - newrpm)/2 + newrpm: newrpm;
+				newrpm = (newrpm < minrpm + 1000) ? minrpm + 1000 : newrpm;
+				interpolate("/engines/engine/rpm",newrpm,0.125);
+			}
+			
+			#help_win.write(sprintf("%.2fmph", bwspeed));
 			
 			# killing engine with the wrong gear
 			if (gear.getValue() > 2 and gspeed < 4) {
@@ -178,7 +200,8 @@ var loop = func {
 			}
 
 		} else {
-			rpm.setValue(throttle.getValue()*(maxrpm+2700));
+			newrpm = (newrpm < minrpm) ? minrpm : throttle.getValue()*(maxrpm+minrpm);
+			rpm.setValue(newrpm);
 			propulsion.setValue(0);
 		}
 		
@@ -222,12 +245,13 @@ var loop = func {
 
 	   	 if(rpm.getValue() < minrpm) rpm.setValue(minrpm);  # place after the rpm calculation
 	 
-	   	 if (fuel.getValue() < 0.0000015) {
+	   	 if (fuel.getValue() < 0.000002) {
 	   	  running.setValue(0);
 	   	  }
 	   	 else {
 	   	  fuel_lev = fuel.getValue();
-	   	  fuel.setValue(fuel_lev - (0.85*throttle.getValue()+0.1)*0.0000015);
+		  setprop("/controls/fuel/remember-level", fuel.getValue()); # save it for restart
+	   	  fuel.setValue(fuel_lev - (throttle.getValue()+0.1)*0.00000162);
 	   	 }
 		
 		#-------------- ENGINE RUNNING END --------------------
