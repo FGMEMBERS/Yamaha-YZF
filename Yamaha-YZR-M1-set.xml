@@ -7,23 +7,23 @@
 -->
 <PropertyList>
  <sim>
-		<description>Yamaha-YZF-M1</description>
+		<description>Yamaha-YZR-M1</description>
 		<author>LAKE OF CONSTANCE HANGAR :: M.Kraus</author>
 		<aircraft-version>0.0.1</aircraft-version>
 		<status>alpha</status>
 		<flight-model>yasim</flight-model>
-		<aero>Yamaha-YZF-M1-yasim</aero>
+		<aero>Yamaha-YZR-M1-yasim</aero>
 
 		<sound>
 			<path>Aircraft/Yamaha-YZF/Sounds/sound.xml</path>
 		</sound>
 
 		<model>
-			<path>Aircraft/Yamaha-YZF/Models/Yamaha-YZF-M1.xml</path>
+			<path>Aircraft/Yamaha-YZF/Models/Yamaha-YZR-M1.xml</path>
 		</model> 
 
 		<startup>
-			<splash-texture>Aircraft/Yamaha-YZF/splash-Yamaha-YZF.png</splash-texture>
+			<splash-texture>Aircraft/Yamaha-YZF/splash-Yamaha-YZR.png</splash-texture>
 		</startup>
 
 		<fuel-fraction>1.0</fuel-fraction>
@@ -140,7 +140,7 @@ and have fun!</text>
 	<menubar>
 		<default>
 		<menu n="10">
-			<label>YFZ-M1</label>
+			<label>YFR-M1</label>
 			<enabled type="bool">true</enabled>
 			<item>
 				<label>--- Tools ---</label>
