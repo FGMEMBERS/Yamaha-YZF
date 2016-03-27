@@ -125,11 +125,11 @@
   <!-- 1. SPEED --> 
   <model>
 	<name>RPM</name>
-    <path>Aircraft/Yamaha-YZF/Models/Instruments/combi/combi.xml</path>
+    <path>Aircraft/Yamaha-YZF/Models/Instruments/tacho/tacho.xml</path>
     <offsets>
-      <x-m> -0.73 </x-m>
-      <y-m> -0.0765 </y-m>
-      <z-m> 0.91 </z-m>
+      <x-m> -0.71 </x-m>
+      <y-m> 0.0 </y-m>
+      <z-m> 0.94 </z-m>
       <pitch-deg> -38 </pitch-deg>
     </offsets>
   </model>
