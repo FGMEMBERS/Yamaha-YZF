@@ -10,6 +10,9 @@ var thissector = props.globals.getNode("/Yamaha-YZF/this-sector");
 var sectortime = props.globals.getNode("/Yamaha-YZF/this-sector-time");
 var laptime = props.globals.getNode("/Yamaha-YZF/this-lap-time");
 var racetime = props.globals.getNode("/Yamaha-YZF/this-race-time");
+var laptimediff = props.globals.initNode("/Yamaha-YZF/this-lap-time-diff",0,"DOUBLE");
+var laptimediffmin = props.globals.initNode("/Yamaha-YZF/this-lap-time-diff-m",0,"DOUBLE");
+var laptimediffsec = props.globals.initNode("/Yamaha-YZF/this-lap-time-diff-s",0,"DOUBLE");
 var inrange = 0;
 
 ################# Geo coordinates from the sector start points ############
@@ -298,7 +301,7 @@ var show_lap_and_sector_time = func{
 				}
 			} 
 			lapt += ct;
-			# for the BMW only
+			# for the laptime view in cockpit
 			if(ct > 0){
 				var result = calc_time(ct);
 				setprop("Yamaha-YZF/this-sector-time-sec", result[0]);
@@ -307,7 +310,7 @@ var show_lap_and_sector_time = func{
 			if(ft > 0){
 				var result = calc_time(ft);
 				setprop("Yamaha-YZF/fastest-sector-time-sec", result[0]);
-				setprop("Yamaha-YZF/fastest-sector-time-min", result[1]);
+				setprop("Yamaha-YZF/fastest-sector-time-min", result[1]);				
 			}
 			# only for mp
 			sectortime.setValue(ct);
@@ -546,6 +549,12 @@ var find_marker = func{
 		var lastsectorendtime = getprop("/Yamaha-YZF/"~pa~"/sector["~thissector.getValue()~"]/start-time") or 0;
 		var lasttime = (lastsectorstarttime != 0 and lastsectorendtime !=0 and (lastsectorendtime - lastsectorstarttime) > 0 ) ? lastsectorendtime - lastsectorstarttime : 0;
 		setprop("/Yamaha-YZF/"~pa~"/sector["~ln~"]/last-time", lasttime);
+		
+		# show the difference to the fastest sectortime
+		var ldiff = (fastesttime > 0 and thissector.getValue() > 0) ? fastesttime - lasttime : 0;
+		ldiff = (thissector.getValue() == 1) ? ldiff : laptimediff.getValue() + ldiff;
+		
+		# set the fastest time if it is
 		if(lasttime > 0 and lasttime < fastesttime or fastesttime == 0) setprop("/Yamaha-YZF/"~pa~"/sector["~ln~"]/fastest-time", lasttime);
 		
 		if(thissector.getValue() == 0){
@@ -558,10 +567,29 @@ var find_marker = func{
 		  }
 		  setprop("/Yamaha-YZF/last-lap-time", totallapresult);
 		  var fastestlap = getprop("/Yamaha-YZF/"~pa~"/fastest-lap") or 0;
+		  
+		  # if actual time is less than fastest laptime
+		  ldiff = (racelap.getValue() > 0) ? fastestlap - totallapresult : 0;
+		  ######
+		  
 		  if(totallapresult > 0 and totallapresult < fastestlap or fastestlap == 0) setprop("/Yamaha-YZF/"~pa~"/fastest-lap", totallapresult);
 		  setprop("/Yamaha-YZF/"~pa~"/lap["~racelap.getValue()~"]/actual-time", totallapresult);
 		  racelap.setValue(racelap.getValue() + 1);
+		  
+  			print("fastest-lap: ",fastestlap);
+  			print("lap-result: ",totallapresult);
 		}
+
+		# show the difference to the fastest even sectortime odd laptime
+		var resultldiff = calc_time(abs(ldiff));
+		setprop("/Yamaha-YZF/this-lap-time-diff-s", resultldiff[0]);
+		setprop("/Yamaha-YZF/this-lap-time-diff-m", resultldiff[1]);
+		laptimediff.setValue(ldiff);
+
+		print("Differenz: ", ldiff);
+		print("Minuten: ", resultldiff[1]);
+		print("sec: ",resultldiff[0]);
+
 		
 		thissector.setValue(thissector.getValue() + 1);
 	}
