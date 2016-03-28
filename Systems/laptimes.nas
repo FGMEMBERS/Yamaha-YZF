@@ -576,8 +576,8 @@ var find_marker = func{
 		  setprop("/Yamaha-YZF/"~pa~"/lap["~racelap.getValue()~"]/actual-time", totallapresult);
 		  racelap.setValue(racelap.getValue() + 1);
 		  
-  			print("fastest-lap: ",fastestlap);
-  			print("lap-result: ",totallapresult);
+  			#print("fastest-lap: ",fastestlap);
+  			#print("lap-result: ",totallapresult);
 		}
 
 		# show the difference to the fastest even sectortime odd laptime
@@ -586,9 +586,9 @@ var find_marker = func{
 		setprop("/Yamaha-YZF/this-lap-time-diff-m", resultldiff[1]);
 		laptimediff.setValue(ldiff);
 
-		print("Differenz: ", ldiff);
-		print("Minuten: ", resultldiff[1]);
-		print("sec: ",resultldiff[0]);
+		#print("Differenz: ", ldiff);
+		#print("Minuten: ", resultldiff[1]);
+		#print("sec: ",resultldiff[0]);
 
 		
 		thissector.setValue(thissector.getValue() + 1);

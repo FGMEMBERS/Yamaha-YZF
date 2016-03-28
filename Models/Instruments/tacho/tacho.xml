@@ -19,9 +19,49 @@
 	   	</emission>
 	</animation>
 	
+	<animation>
+		 <type>material</type>
+		 <object-name>rpm_9500</object-name>
+		 <object-name>rpm_10000</object-name>
+		 <object-name>rpm_10500</object-name>
+		 <object-name>rpm_11000</object-name>
+		 <object-name>rpm_11500</object-name>
+		 <object-name>rpm_12000</object-name>
+		 <object-name>rpm_12500</object-name>
+		 <object-name>rpm_13000</object-name>
+		 <emission>
+		  <red>1</red>
+		  <green>1</green>
+		  <blue>1</blue>
+		  <factor-prop>systems/electrical/outputs/instrument-lights</factor-prop>
+	   	</emission>
+	</animation>
+	
     <animation>
      <type>material</type>
-     <object-name>lcd-back</object-name>		
+     <object-name>lcd-back</object-name>
+		<object-name>rpm_4000</object-name>
+		<object-name>rpm_4250</object-name>
+		<object-name>rpm_4500</object-name>
+		<object-name>rpm_4750</object-name>
+		<object-name>rpm_5000</object-name>
+		<object-name>rpm_5250</object-name>
+		<object-name>rpm_5500</object-name>
+		<object-name>rpm_5750</object-name>
+		<object-name>rpm_6000</object-name>
+		<object-name>rpm_6250</object-name>
+		<object-name>rpm_6500</object-name>
+		<object-name>rpm_6750</object-name>
+		<object-name>rpm_7000</object-name>
+		<object-name>rpm_7250</object-name>
+		<object-name>rpm_7500</object-name>
+		<object-name>rpm_7750</object-name>
+		<object-name>rpm_8000</object-name>
+		<object-name>rpm_8200</object-name>
+		<object-name>rpm_8400</object-name>
+		<object-name>rpm_8600</object-name>
+		<object-name>rpm_8800</object-name>
+		<object-name>rpm_9000</object-name>			
 		 <condition>
 			<not><property>/sim/rendering/rembrandt/enabled</property></not>
 			<property>systems/electrical/outputs/instrument-lights</property>
@@ -44,29 +84,59 @@
 		<object-name>digit-gear</object-name>
 		<object-name>arrow</object-name>		 
 		<object-name>t-h-1.000</object-name>
-		 <object-name>t-h-1.002</object-name>
-		 <object-name>t-h-10.000</object-name>
-		 <object-name>t-h-10.002</object-name>
-		 <object-name>t-s-01</object-name>
-		 <object-name>t-s-1</object-name>
-		 <object-name>t-s-10</object-name>
-		 <object-name>t-m-1</object-name>
-		 <object-name>t-m-10</object-name>
-		 <object-name>t-s-01.001</object-name>
-		 <object-name>t-s-1.001</object-name>
-		 <object-name>t-s-10.001</object-name>
-		 <object-name>t-s-100.001</object-name>
-		 <object-name>t-m-1.001</object-name>
-		 <object-name>t-m-10.001</object-name>
-		 <object-name>t-s-01.002</object-name>
-		 <object-name>t-s-1.002</object-name>
-		 <object-name>t-s-10.002</object-name>
-		 <object-name>t-m-1.002</object-name>
-		 <object-name>t-m-10.002</object-name>
-		 <object-name>t-s-plus</object-name>
-		 <object-name>t-s-minus</object-name>
-		 <object-name>dots</object-name>
-		 <object-name>dots.001</object-name>
+		<object-name>t-h-1.002</object-name>
+		<object-name>t-h-10.000</object-name>
+		<object-name>t-h-10.002</object-name>
+		<object-name>t-s-01</object-name>
+		<object-name>t-s-1</object-name>
+		<object-name>t-s-10</object-name>
+		<object-name>t-m-1</object-name>
+		<object-name>t-m-10</object-name>
+		<object-name>t-s-01.001</object-name>
+		<object-name>t-s-1.001</object-name>
+		<object-name>t-s-10.001</object-name>
+		<object-name>t-s-100.001</object-name>
+		<object-name>t-m-1.001</object-name>
+		<object-name>t-m-10.001</object-name>
+		<object-name>t-s-01.002</object-name>
+		<object-name>t-s-1.002</object-name>
+		<object-name>t-s-10.002</object-name>
+		<object-name>t-m-1.002</object-name>
+		<object-name>t-m-10.002</object-name>
+		<object-name>t-s-plus</object-name>
+		<object-name>t-s-minus</object-name>
+		<object-name>dots</object-name>
+		<object-name>dots.001</object-name>
+		<object-name>rpm_4000</object-name>
+		<object-name>rpm_4250</object-name>
+		<object-name>rpm_4500</object-name>
+		<object-name>rpm_4750</object-name>
+		<object-name>rpm_5000</object-name>
+		<object-name>rpm_5250</object-name>
+		<object-name>rpm_5500</object-name>
+		<object-name>rpm_5750</object-name>
+		<object-name>rpm_6000</object-name>
+		<object-name>rpm_6250</object-name>
+		<object-name>rpm_6500</object-name>
+		<object-name>rpm_6750</object-name>
+		<object-name>rpm_7000</object-name>
+		<object-name>rpm_7250</object-name>
+		<object-name>rpm_7500</object-name>
+		<object-name>rpm_7750</object-name>
+		<object-name>rpm_8000</object-name>
+		<object-name>rpm_8200</object-name>
+		<object-name>rpm_8400</object-name>
+		<object-name>rpm_8600</object-name>
+		<object-name>rpm_8800</object-name>
+		<object-name>rpm_9000</object-name>
+		<object-name>rpm_9500</object-name>
+		<object-name>rpm_10000</object-name>
+		<object-name>rpm_10500</object-name>
+		<object-name>rpm_11000</object-name>
+		<object-name>rpm_11500</object-name>
+		<object-name>rpm_12000</object-name>
+		<object-name>rpm_12500</object-name>
+		<object-name>rpm_13000</object-name>
 	</animation>
 
 	<effect>
@@ -78,29 +148,59 @@
 		<object-name>digit-gear</object-name>
 		<object-name>arrow</object-name>		 
 		<object-name>t-h-1.000</object-name>
-		 <object-name>t-h-1.002</object-name>
-		 <object-name>t-h-10.000</object-name>
-		 <object-name>t-h-10.002</object-name>
-		 <object-name>t-s-01</object-name>
-		 <object-name>t-s-1</object-name>
-		 <object-name>t-s-10</object-name>
-		 <object-name>t-m-1</object-name>
-		 <object-name>t-m-10</object-name>
-		 <object-name>t-s-01.001</object-name>
-		 <object-name>t-s-1.001</object-name>
-		 <object-name>t-s-10.001</object-name>
-		 <object-name>t-s-100.001</object-name>
-		 <object-name>t-m-1.001</object-name>
-		 <object-name>t-m-10.001</object-name>
-		 <object-name>t-s-01.002</object-name>
-		 <object-name>t-s-1.002</object-name>
-		 <object-name>t-s-10.002</object-name>
-		 <object-name>t-m-1.002</object-name>
-		 <object-name>t-m-10.002</object-name>
-		 <object-name>t-s-plus</object-name>
-		 <object-name>t-s-minus</object-name>
-		 <object-name>dots</object-name>
-		 <object-name>dots.001</object-name>
+		<object-name>t-h-1.002</object-name>
+		<object-name>t-h-10.000</object-name>
+		<object-name>t-h-10.002</object-name>
+		<object-name>t-s-01</object-name>
+		<object-name>t-s-1</object-name>
+		<object-name>t-s-10</object-name>
+		<object-name>t-m-1</object-name>
+		<object-name>t-m-10</object-name>
+		<object-name>t-s-01.001</object-name>
+		<object-name>t-s-1.001</object-name>
+		<object-name>t-s-10.001</object-name>
+		<object-name>t-s-100.001</object-name>
+		<object-name>t-m-1.001</object-name>
+		<object-name>t-m-10.001</object-name>
+		<object-name>t-s-01.002</object-name>
+		<object-name>t-s-1.002</object-name>
+		<object-name>t-s-10.002</object-name>
+		<object-name>t-m-1.002</object-name>
+		<object-name>t-m-10.002</object-name>
+		<object-name>t-s-plus</object-name>
+		<object-name>t-s-minus</object-name>
+		<object-name>dots</object-name>
+		<object-name>dots.001</object-name>
+		<object-name>rpm_4000</object-name>
+		<object-name>rpm_4250</object-name>
+		<object-name>rpm_4500</object-name>
+		<object-name>rpm_4750</object-name>
+		<object-name>rpm_5000</object-name>
+		<object-name>rpm_5250</object-name>
+		<object-name>rpm_5500</object-name>
+		<object-name>rpm_5750</object-name>
+		<object-name>rpm_6000</object-name>
+		<object-name>rpm_6250</object-name>
+		<object-name>rpm_6500</object-name>
+		<object-name>rpm_6750</object-name>
+		<object-name>rpm_7000</object-name>
+		<object-name>rpm_7250</object-name>
+		<object-name>rpm_7500</object-name>
+		<object-name>rpm_7750</object-name>
+		<object-name>rpm_8000</object-name>
+		<object-name>rpm_8200</object-name>
+		<object-name>rpm_8400</object-name>
+		<object-name>rpm_8600</object-name>
+		<object-name>rpm_8800</object-name>
+		<object-name>rpm_9000</object-name>
+		<object-name>rpm_9500</object-name>
+		<object-name>rpm_10000</object-name>
+		<object-name>rpm_10500</object-name>
+		<object-name>rpm_11000</object-name>
+		<object-name>rpm_11500</object-name>
+		<object-name>rpm_12000</object-name>
+		<object-name>rpm_12500</object-name>
+		<object-name>rpm_13000</object-name>
 	</effect>
 
 	<model>
@@ -123,6 +223,16 @@
 	 		<property>/sim/time/sun-angle-rad</property>
 			<value>1.4</value>
 		</greater-than>
+	 </condition>
+	</animation>
+	
+	<animation>
+	  <type>select</type>
+	  <object-name>lcd-off</object-name>
+	  <condition>
+		  <not>
+	 		  <property>/engines/engine/running</property>
+		  </not>
 	 </condition>
 	</animation>
 	
@@ -468,6 +578,336 @@
 	        <z>0</z>
 	    </axis>
 	</animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_4000</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>3500</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_4250</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>4000</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_4500</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>4500</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_4750</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>5000</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_5000</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>5500</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_5250</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>6000</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_5500</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>6500</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_5750</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>7000</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_6000</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>7500</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_6250</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>8000</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_6500</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>8500</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_6750</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>9000</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_7000</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>9500</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_7250</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>9500</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_7500</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>10000</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_7750</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>10500</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_8000</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>11000</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_8200</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>11500</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_8400</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>12000</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_8600</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>12500</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_8800</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>13000</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_9000</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>13500</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_9500</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>14125</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_10000</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>14750</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_10500</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>15375</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_11000</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>16000</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_11500</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>16625</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_12000</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>17250</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_12500</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>17875</value>
+          </greater-than>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+		 <object-name>rpm_13000</object-name>
+      <condition>      
+		  <greater-than>
+          	<property>engines/engine/rpm</property>
+		  	<value>18500</value>
+          </greater-than>
+      </condition>
+    </animation>
 
 </PropertyList>
 

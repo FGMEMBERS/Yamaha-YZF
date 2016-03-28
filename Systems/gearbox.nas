@@ -108,7 +108,7 @@ var loop = func {
 		#inertia = (fuel_weight.getValue() + weight.getValue())/245; # 245 max. weight and fuel
 		
 		# overgspeed the engine
-		if(rpm.getValue() > (maxrpm - 700)){
+		if(rpm.getValue() > (maxrpm - 500)){
 			killed.setValue(killed.getValue() + 1/maxhealth);
 			if(killed.getValue() >= 1)rpm.setValue(40000);
 		}
