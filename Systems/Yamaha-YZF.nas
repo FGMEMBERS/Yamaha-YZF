@@ -7,7 +7,7 @@ var config_dlg = gui.Dialog.new("/sim/gui/dialogs/config/dialog", getprop("/sim/
 var hangoffspeed = props.globals.initNode("/controls/hang-off-speed",0,"DOUBLE");
 var hangoffhdg = props.globals.initNode("/controls/hang-off-hdg",0,"DOUBLE");
 var hangoffviewdeg = props.globals.initNode("/controls/hang-off-view-deg",0,"DOUBLE");
-var steeringdamper = props.globals.initNode("/controls/steering-damper",1,"DOUBLE");
+var steeringdamper = props.globals.initNode("/controls/steering-damper",1.1,"DOUBLE");
 var waiting = props.globals.initNode("/controls/waiting",0,"DOUBLE");
 
 ################## Little Help Window on bottom of screen #################
@@ -41,6 +41,7 @@ var forkcontrol = func{
 		}
 	}else{
 		var sensibility_fork = steeringdamper.getValue()*0.03;
+		sensibility_fork = (sensibility_fork < 0.1)? 0.1 : sensibility_fork;
 		interpolate("/controls/flight/fork", r, sensibility_fork);
 	}
 	if(bs > 40){
@@ -165,6 +166,7 @@ setlistener("/controls/flight/aileron", func (position){
 			#print("NP: ", np);
 			# the *0.0625 is the calculation number for the 16clicks Oehlins steering damper
 			var sensibility = (np == 0 or abs(np) < steeringdamper.getValue()*0.0625) ? steeringdamper.getValue()*0.0625 : abs(np);
+			sensibility = (sensibility < 0.1)? 0.1 : sensibility;
 			interpolate("/controls/flight/aileron-manual", np, sensibility);
 		}
 	}
