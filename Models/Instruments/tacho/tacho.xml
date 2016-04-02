@@ -63,7 +63,6 @@
 		<object-name>rpm_8800</object-name>
 		<object-name>rpm_9000</object-name>			
 		 <condition>
-			<not><property>/sim/rendering/rembrandt/enabled</property></not>
 			<property>systems/electrical/outputs/instrument-lights</property>
 		</condition>
      <emission>
