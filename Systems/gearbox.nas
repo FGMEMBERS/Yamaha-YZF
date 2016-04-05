@@ -44,22 +44,6 @@ var ascon = props.globals.initNode("/controls/Yamaha-YZF/SCS/on-off",1,"BOOL");
 
 var loop = func {
 
-	# shoulder view helper
-	var cv = getprop("sim/current-view/view-number") or 0;
-	var apos = getprop("/devices/status/keyboard/event/key") or 0;
-	var press = getprop("/devices/status/keyboard/event/pressed") or 0;
-	var du = getprop("/controls/Yamaha-YZF/driver-up") or 0;
-	#helper turn shoulder to look back
-	if(cv == 0 and !du){
-		if(apos == 49 and press){
-			setprop("/sim/current-view/heading-offset-deg", 160);
-			setprop("/controls/Yamaha-YZF/driver-looks-back",1);
-		}else{
-			setprop("/sim/current-view/heading-offset-deg", 0);
-			setprop("/controls/Yamaha-YZF/driver-looks-back",0);
-		}
-	}
-
 	# properties for ABS and SCS at the bottom of this script
 	var comp_m = getprop("/gear/gear[1]/compression-m") or 0;
 	var brake_ctrl_left = getprop("/controls/gear/brake-left") or 0;
@@ -124,7 +108,7 @@ var loop = func {
 		#inertia = (fuel_weight.getValue() + weight.getValue())/245; # 245 max. weight and fuel
 		
 		# overgspeed the engine
-		if(rpm.getValue() > (maxrpm - 700)){
+		if(rpm.getValue() > (maxrpm - 500)){
 			killed.setValue(killed.getValue() + 1/maxhealth);
 			if(killed.getValue() >= 1)rpm.setValue(40000);
 		}
@@ -141,22 +125,22 @@ var loop = func {
 			vmax = 0;
 			fastcircuit.setValue(0);
 		} else if (gear.getValue() == 1) {
-			vmax = 50;
+			vmax = 65;
 			fastcircuit.setValue(0.1);
 		} else if (gear.getValue() == 2) {
-			vmax =  70;
+			vmax =  85;
 			fastcircuit.setValue(0.2);
 		} else if (gear.getValue() == 3) {
-			vmax = 100;
+			vmax = 115;
 			fastcircuit.setValue(0.3);
 		} else if (gear.getValue() == 4) {
-			vmax = 135;
+			vmax = 140;
 			fastcircuit.setValue(0.4);
 		} else if (gear.getValue() == 5) {
-			vmax = 174;
+			vmax = 170;
 			fastcircuit.setValue(0.5);
 		} else if (gear.getValue() == 6) {
-			vmax = 205;
+			vmax = 213;
 			fastcircuit.setValue(0.6);
 		}
 
@@ -233,12 +217,19 @@ var loop = func {
 			setprop("/controls/Yamaha-YZF/ctrl-light-overspeed", 0);
 		}
 
-		# Anti - slip regulation Yamaha called SCS
-		if(comp_m < 0.06 and brake_ctrl_right <= 0.5 and brake_ctrl_left <= 0.5 and gspeed > 70 and ascon.getValue() == 1){
-			propulsion.setValue(propulsion.getValue() + 0.25);
-			setprop("/controls/Yamaha-YZF/SCS/ctrl-light", 1);
+		# Automatic RPM overspeed regulation
+		if(rpm.getValue() > maxrpm-900){
+			if(engine_rpm_regulation.getValue() == 1 ){
+				propulsion.setValue(0);
+				if (speed > 20) engine_brake.setValue(1);
+				rpm.setValue(maxrpm-1200);
+				setprop("/controls/Yamaha-YZF/ctrl-light-overspeed", 1);
+			}else{
+				setprop("/controls/Yamaha-YZF/ctrl-light-overspeed", 1);
+			}
+			
 		}else{
-			setprop("/controls/Yamaha-YZF/SCS/ctrl-light", 0);
+			setprop("/controls/Yamaha-YZF/ctrl-light-overspeed", 0);
 		}
 		
 		#help_win.write(sprintf("Propulsion: %.2f", propulsion.getValue()));

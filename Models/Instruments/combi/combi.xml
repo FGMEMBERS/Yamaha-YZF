@@ -49,6 +49,7 @@
 	<animation>
 	<type>noshadow</type>
 	<object-name>box</object-name>
+	<object-name>black</object-name>
 	<object-name>rpm.bg</object-name>
 	<object-name>rpm.0</object-name>
 	<object-name>rpm.1</object-name>
@@ -58,7 +59,7 @@
 	<object-name>N</object-name>
 	<object-name>N.001</object-name>
 	<object-name>N.002</object-name>
-	<object-name>N.003</object-name>a
+	<object-name>N.003</object-name>
 	<object-name>N.004</object-name>
 	<object-name>N.005</object-name>
 	<object-name>N.006</object-name>
@@ -83,11 +84,6 @@
 	<object-name>ctrl.comp.front</object-name>
 	<object-name>ctrl.comp.rear</object-name>
 	</animation>
-	
-	<effect>
-		<inherits-from>Effects/model-transparent</inherits-from>
-		<object-name>black</object-name>
-	</effect>
 	
     <animation>
       <type>select</type>		 

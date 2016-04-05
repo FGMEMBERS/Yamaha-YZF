@@ -10,6 +10,9 @@ var thissector = props.globals.getNode("/Yamaha-YZF/this-sector");
 var sectortime = props.globals.getNode("/Yamaha-YZF/this-sector-time");
 var laptime = props.globals.getNode("/Yamaha-YZF/this-lap-time");
 var racetime = props.globals.getNode("/Yamaha-YZF/this-race-time");
+var laptimediff = props.globals.initNode("/Yamaha-YZF/this-lap-time-diff",0,"DOUBLE");
+var laptimediffmin = props.globals.initNode("/Yamaha-YZF/this-lap-time-diff-m",0,"DOUBLE");
+var laptimediffsec = props.globals.initNode("/Yamaha-YZF/this-lap-time-diff-s",0,"DOUBLE");
 var inrange = 0;
 
 ################# Geo coordinates from the sector start points ############
@@ -135,6 +138,34 @@ var wp1bo = [48.85188861,10.33185324,614.0,"Start/Ziel"];
 # Ground Marker Position Steilkurve - lat,lon,alt in meter
 var wp2bo = [48.85034821,10.33039495,617.0,"Steilkurve"];
 
+##### Qatar - Losail 
+
+# Ground Marker Position FINISH - lat,lon,alt in meter
+var wp1qa = [25.48970916,51.4493161,13,"Sector1"];
+
+# Ground Marker Sector2 - lat,lon,alt in meter
+var wp2qa = [25.49535439,51.45160623,13,"Sector2"];
+
+# Ground Marker Sector3 - lat,lon,alt in meter
+var wp3qa = [25.49350442,51.45635975,13,"Sector3"];
+
+# Ground Marker Sector4 - lat,lon,alt in meter
+var wp4qa = [25.48741014,51.45941919,13,"Sector4"];
+
+##### Termas de Rio Hondo - Argentina 
+
+# Ground Marker Position FINISH - lat,lon,alt in meter
+var wp1te = [-27.51143103,-64.91852054,285,"Sector1"];
+
+# Ground Marker Sector2 - lat,lon,alt in meter
+var wp2te = [-27.50679550,-64.91789815,285,"Sector2"];
+
+# Ground Marker Sector3 - lat,lon,alt in meter
+var wp3te = [-27.50475159,-64.91049189,285,"Sector3"];
+
+# Ground Marker Sector4 - lat,lon,alt in meter
+var wp4te = [-27.50749888,-64.91382656,285,"Sector4"];
+
 var pa = "TT";
 var sectors = sectors_tt = [wp1tt, wp2tt, wp3tt, wp4tt, wp5tt, wp6tt];
 var sectors_s100 = [wp1s, wp2s, wp3s];
@@ -147,6 +178,8 @@ var sectors_mf = [wp1mf, wp2mf];
 var sectors_cc = [wp1cc, wp2cc];
 var sectors_ct = [wp1ct, wp2ct, wp3ct];
 var sectors_bo = [wp1bo, wp2bo];
+var sectors_qa = [wp1qa, wp2qa, wp3qa, wp4qa];
+var sectors_te = [wp1te, wp2te, wp3te, wp4te];
 
 ############################ helper for view ####################################
 var show_helper = func(s) {
@@ -268,7 +301,7 @@ var show_lap_and_sector_time = func{
 				}
 			} 
 			lapt += ct;
-			# for the BMW only
+			# for the laptime view in cockpit
 			if(ct > 0){
 				var result = calc_time(ct);
 				setprop("Yamaha-YZF/this-sector-time-sec", result[0]);
@@ -277,7 +310,7 @@ var show_lap_and_sector_time = func{
 			if(ft > 0){
 				var result = calc_time(ft);
 				setprop("Yamaha-YZF/fastest-sector-time-sec", result[0]);
-				setprop("Yamaha-YZF/fastest-sector-time-min", result[1]);
+				setprop("Yamaha-YZF/fastest-sector-time-min", result[1]);				
 			}
 			# only for mp
 			sectortime.setValue(ct);
@@ -394,6 +427,12 @@ var find_marker = func{
 	
 	marker_wp_pos.set_latlon(wp1bo[0], wp1bo[1]);
 	var dis_to_BO = marker_wp_pos.distance_to(mypos);
+	
+	marker_wp_pos.set_latlon(wp1qa[0], wp1qa[1], wp1qa[2], wp1qa[3]);
+	var dis_to_QA = marker_wp_pos.distance_to(mypos);
+	
+	marker_wp_pos.set_latlon(wp1te[0], wp1te[1], wp1te[2], wp1te[3]);
+	var dis_to_TE = marker_wp_pos.distance_to(mypos);
 		
 	if(dis_to_TT < 10000){   # if we are far away - 10km - from the Isle of Man stop script
 		#print("We are on the Isle of Man");
@@ -439,6 +478,14 @@ var find_marker = func{
 		#print("Bopfingen - Germany");
 		sectors = sectors_bo;
 		pa = "BO";
+	}else if(dis_to_QA < 10000){
+		#print("Qatar - Losail-Circuit");
+		sectors = sectors_qa;
+		pa = "QA";
+	}else if(dis_to_TE < 10000){
+		#print("Argentina - Termas de Rio Hondo");
+		sectors = sectors_te;
+		pa = "TE";
 	}
 
 	# newbies have red jackets
@@ -502,6 +549,12 @@ var find_marker = func{
 		var lastsectorendtime = getprop("/Yamaha-YZF/"~pa~"/sector["~thissector.getValue()~"]/start-time") or 0;
 		var lasttime = (lastsectorstarttime != 0 and lastsectorendtime !=0 and (lastsectorendtime - lastsectorstarttime) > 0 ) ? lastsectorendtime - lastsectorstarttime : 0;
 		setprop("/Yamaha-YZF/"~pa~"/sector["~ln~"]/last-time", lasttime);
+		
+		# show the difference to the fastest sectortime
+		var ldiff = (fastesttime > 0 and thissector.getValue() > 0) ? fastesttime - lasttime : 0;
+		ldiff = (thissector.getValue() == 1) ? ldiff : laptimediff.getValue() + ldiff;
+		
+		# set the fastest time if it is
 		if(lasttime > 0 and lasttime < fastesttime or fastesttime == 0) setprop("/Yamaha-YZF/"~pa~"/sector["~ln~"]/fastest-time", lasttime);
 		
 		if(thissector.getValue() == 0){
@@ -514,10 +567,29 @@ var find_marker = func{
 		  }
 		  setprop("/Yamaha-YZF/last-lap-time", totallapresult);
 		  var fastestlap = getprop("/Yamaha-YZF/"~pa~"/fastest-lap") or 0;
+		  
+		  # if actual time is less than fastest laptime
+		  ldiff = (racelap.getValue() > 0) ? fastestlap - totallapresult : 0;
+		  ######
+		  
 		  if(totallapresult > 0 and totallapresult < fastestlap or fastestlap == 0) setprop("/Yamaha-YZF/"~pa~"/fastest-lap", totallapresult);
 		  setprop("/Yamaha-YZF/"~pa~"/lap["~racelap.getValue()~"]/actual-time", totallapresult);
 		  racelap.setValue(racelap.getValue() + 1);
+		  
+  			#print("fastest-lap: ",fastestlap);
+  			#print("lap-result: ",totallapresult);
 		}
+
+		# show the difference to the fastest even sectortime odd laptime
+		var resultldiff = calc_time(abs(ldiff));
+		setprop("/Yamaha-YZF/this-lap-time-diff-s", resultldiff[0]);
+		setprop("/Yamaha-YZF/this-lap-time-diff-m", resultldiff[1]);
+		laptimediff.setValue(ldiff);
+
+		#print("Differenz: ", ldiff);
+		#print("Minuten: ", resultldiff[1]);
+		#print("sec: ",resultldiff[0]);
+
 		
 		thissector.setValue(thissector.getValue() + 1);
 	}

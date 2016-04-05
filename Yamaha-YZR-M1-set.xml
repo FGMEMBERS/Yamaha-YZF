@@ -7,23 +7,23 @@
 -->
 <PropertyList>
  <sim>
-		<description>Yamaha-YZF-R1</description>
+		<description>Yamaha-YZR-M1</description>
 		<author>LAKE OF CONSTANCE HANGAR :: M.Kraus</author>
 		<aircraft-version>0.0.1</aircraft-version>
 		<status>alpha</status>
 		<flight-model>yasim</flight-model>
-		<aero>Yamaha-YZF-R1-yasim</aero>
+		<aero>Yamaha-YZR-M1-yasim</aero>
 
 		<sound>
 			<path>Aircraft/Yamaha-YZF/Sounds/sound.xml</path>
 		</sound>
 
 		<model>
-			<path>Aircraft/Yamaha-YZF/Models/Yamaha-YZF-R1.xml</path>
+			<path>Aircraft/Yamaha-YZF/Models/Yamaha-YZR-M1.xml</path>
 		</model> 
 
 		<startup>
-			<splash-texture>Aircraft/Yamaha-YZF/splash-Yamaha-YZF.png</splash-texture>
+			<splash-texture>Aircraft/Yamaha-YZF/splash-Yamaha-YZR.png</splash-texture>
 		</startup>
 
 		<fuel-fraction>1.0</fuel-fraction>
@@ -45,7 +45,7 @@
 			 </limits>
 			  <!-- x/y/z == right/up/back -->
 				<x-offset-m archive="y" type="double">0.0</x-offset-m>
-				<y-offset-m archive="y" type="double">1.35</y-offset-m>  <!-- up-down -->
+				<y-offset-m archive="y" type="double">1.3</y-offset-m>  <!-- up-down -->
 				<z-offset-m archive="y" type="double">-0.13</z-offset-m> <!-- fore-back -->
 				<pitch-offset-deg>-8</pitch-offset-deg>
 				<default-field-of-view-deg type="double">72</default-field-of-view-deg>
@@ -140,7 +140,7 @@ and have fun!</text>
 	<menubar>
 		<default>
 		<menu n="10">
-			<label>YFZ-R1</label>
+			<label>YFR-M1</label>
 			<enabled type="bool">true</enabled>
 			<item>
 				<label>--- Tools ---</label>
@@ -331,6 +331,8 @@ and have fun!</text>
 		<path>/controls/flight/select-throttle-input</path>
 		<path>/controls/Yamaha-YZF/old-mens-mode</path>
 		<path>/controls/hang-off-speed</path>
+		<path>/controls/hang-off-view-deg</path>
+		<path>/controls/steering-damper</path>
 		<path>/controls/fuel/remember-level</path>
 	</aircraft-data> 
 	<current-view>
@@ -1159,7 +1161,7 @@ and have fun!</text>
 		<lap n="13">
 			<actual-time type="float">0.0</actual-time>
 		</lap>
-	</BO>  
+	</BO> 
 </Yamaha-YZF>
 
  <!--CONTROLS-->
@@ -1352,7 +1354,7 @@ and have fun!</text>
   <yamaha>
    <file>Aircraft/Yamaha-YZF/Systems/Yamaha-YZF.nas</file>
    <file>Aircraft/Yamaha-YZF/Systems/gearbox.nas</file>
-   <file>Aircraft/Yamaha-YZF/Systems/liveries-R1.nas</file>
+   <file>Aircraft/Yamaha-YZF/Systems/liveries.nas</file>
    <file>Aircraft/Yamaha-YZF/Systems/laptimes.nas</file>
    <file>Aircraft/Yamaha-YZF/VirtualRacer/virtual_racer.nas</file>
   </yamaha>
