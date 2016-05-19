@@ -30,7 +30,7 @@ var lastrpm = 0;
 var newrpm = 0;
 var transmissionpower = 0;
 var minrpm = 2100;
-var maxrpm = 19500;
+var maxrpm = 20000;
 var newrpm = 0;
 var clutchrpm = 0;
 var maxhealth = 40; # for the engine killing, higher is longer live while overspeed rpm
@@ -108,7 +108,7 @@ var loop = func {
 		#inertia = (fuel_weight.getValue() + weight.getValue())/245; # 245 max. weight and fuel
 		
 		# overgspeed the engine
-		if(rpm.getValue() > (maxrpm - 500)){
+		if(rpm.getValue() > (maxrpm - 400)){
 			killed.setValue(killed.getValue() + 1/maxhealth);
 			if(killed.getValue() >= 1)rpm.setValue(40000);
 		}
@@ -140,7 +140,7 @@ var loop = func {
 			vmax = 170;
 			fastcircuit.setValue(0.5);
 		} else if (gear.getValue() == 6) {
-			vmax = 213;
+			vmax = 220;
 			fastcircuit.setValue(0.6);
 		}
 
@@ -208,29 +208,18 @@ var loop = func {
 		}
 		
 		# Automatic RPM overspeed regulation
-		if(engine_rpm_regulation.getValue() == 1 and rpm.getValue() > maxrpm-1500){
+		if(engine_rpm_regulation.getValue() == 1 and rpm.getValue() > maxrpm-700){
 			propulsion.setValue(0);
-			if (speed > 20) engine_brake.setValue(0.8);
-			rpm.setValue(maxrpm-1000);
+			if (speed > 20) engine_brake.setValue(1.0);
+			rpm.setValue(maxrpm-800);
+		}
+		
+		# Control light in cockpit
+		if(rpm.getValue() > maxrpm-2100 or speedlimstate.getBoolValue() == 1){
 			setprop("/controls/Yamaha-YZF/ctrl-light-overspeed", 1);
 		}else{
 			setprop("/controls/Yamaha-YZF/ctrl-light-overspeed", 0);
-		}
-
-		# Automatic RPM overspeed regulation
-		if(rpm.getValue() > maxrpm-900){
-			if(engine_rpm_regulation.getValue() == 1 ){
-				propulsion.setValue(0);
-				if (speed > 20) engine_brake.setValue(1);
-				rpm.setValue(maxrpm-1200);
-				setprop("/controls/Yamaha-YZF/ctrl-light-overspeed", 1);
-			}else{
-				setprop("/controls/Yamaha-YZF/ctrl-light-overspeed", 1);
-			}
-			
-		}else{
-			setprop("/controls/Yamaha-YZF/ctrl-light-overspeed", 0);
-		}
+		}		
 		
 		#help_win.write(sprintf("Propulsion: %.2f", propulsion.getValue()));
 
