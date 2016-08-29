@@ -260,7 +260,39 @@
   	      <label>laps</label>
   	      <halign>right</halign>
   	    </text>
-  	  </group>		
+  	  </group>
+	  	  
+  	  <group>
+  	    <layout>hbox</layout>
+  	    <text>
+  	      <label>Czech - Automotodrom Brno (LKCM) ............................................</label>
+  	      <halign>left</halign>
+  	    </text>
+  	    <input>
+  	      <property>/Yamaha-YZF/BC/race-laps</property>
+  	      <type>INTEGER</type>
+  	    </input>
+  	    <text>
+  	      <label>laps</label>
+  	      <halign>right</halign>
+  	    </text>
+  	  </group>	  
+	  	  
+  	  <group>
+  	    <layout>hbox</layout>
+  	    <text>
+  	      <label>Great Britain - Silverstone (EGBT) .................................................</label>
+  	      <halign>left</halign>
+  	    </text>
+  	    <input>
+  	      <property>/Yamaha-YZF/SC/race-laps</property>
+  	      <type>INTEGER</type>
+  	    </input>
+  	    <text>
+  	      <label>laps</label>
+  	      <halign>right</halign>
+  	    </text>
+  	  </group>			
 	  
   	  <group>
   	    <layout>hbox</layout>
