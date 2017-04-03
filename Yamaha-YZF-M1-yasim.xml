@@ -8,7 +8,7 @@
 <airplane mass="900" version="YASIM_VERSION_CURRENT">
 
   <approach speed="16" aoa="2" fuel="0.8">
-    <control-setting axis="/controls/flight/elevator" value="0.15"/>
+    <control-setting axis="/controls/flight/elevator_trim" value="0.15"/>
     <control-setting axis="/controls/engines/engine[0]/mixture" value="1.0"/>
     <control-setting axis="/controls/engines/engine[0]/propeller-pitch" value="0.20"/>
   </approach>
